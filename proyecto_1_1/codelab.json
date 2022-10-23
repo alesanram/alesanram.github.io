@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-23T21:49:28+02:00",
+  "id": "proteccion_UEFI_01",
+  "duration": 0,
+  "title": "Protección de la BIOS/UEFI de un HP",
+  "summary": "Guia para protección de bios",
+  "source": "codelab.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "protección",
+    "bios"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "proteccion_UEFI_01"
+}

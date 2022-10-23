@@ -1,0 +1,79 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Protección de la BIOS/UEFI de un HP</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="proteccion_UEFI_01"
+                  title="Protección de la BIOS/UEFI de un HP"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Pasos Iniciales" duration="1">
+        <p>Normalmente las propias marcas utilizan diferentes combinaciones de teclas para  entrar a la Bios.<br><em>En la tabla siguiente puedes ver las combinaciones de teclas según la marca<br><br>  </em><img alt="tabla de bios" src="./img/8e7d9c04ca38ef9d.png"><br><br> Pero los Hp de los que va esta guía utilizan las teclas de F10 o Esc  </p>
+<h2 is-upgraded><strong>¿Como entrar a la BIOS?</strong></h2>
+<p> En la pantalla de arranque del pc, como la que se muestra abajo pulsa las teclas F10 o Esc para acceder a la BIOS y si se ejecuta correctamente deberá salir una línea de texto indicando que estas entrando a la Bios.  <img alt="imagen hp carge" src="./img/9d6670eb40addae7.jpg">  Después de entrar en ella debería entrar en el apartado principal de la Bios como la imagen, algunos modelos pueden ser un poco diferentes dependiendo de la edad del ordenador, pero los pasos a seguir son los mismos  <img alt="imagen main menu" src="./img/b26a54be47b2c3da.jpg">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseñas de la BIOS" duration="5">
+<h2 is-upgraded><strong>Definición</strong></h2>
+<h3 is-upgraded><strong><em>Contraseña de administración</em></strong></h3>
+<p> Es una contraseña que impide que un usuario no autorizado acceda a la BIOS o realice cambios en la configuración del BIOS.<br> Pero no es demasiado segura ya que en realidad existen llaves maestras para acceder a la administración de nuestras BIOS.  </p>
+<h3 is-upgraded><strong><em>Contraseña Power On</em></strong></h3>
+<p> Es una contraseña que se solicitará para poder encender el equipo.<br> Esta opción no suele utilizarse en servidores, ya que si el equipo se reinicia o se intenta encender a través de la red.  </p>
+<h2 is-upgraded><strong>Pasos a seguir</strong></h2>
+<p> Primero nos moveremos al apartado de <strong>Security</strong>, en este menú configuraremos las contraseñas de administrador y de Power On  <img alt="imagen menu Security" src="./img/f7dc76f5c2bdf0a8.jpg">  Utilizando las flechas nos situaremos en la opción de Administrator Password, esta opción debe estar en <strong>clear</strong>, significando que no hay contraseña establecida, al pulsar <strong>intro</strong> nos pedirá que escribamos una nueva contraseña.<br> Lo más recomendable es que esta contraseña tenga más de 8 caracteres y utilice caracteres alfanuméricos y si es posible también caracteres especiales.  <img alt="imagen administrator password" src="./img/35ed632898727a7f.jpg">  Para advertirnos de los caracteres no permitidos el ordenador hará pitar unos pitidos cada vez que intentemos escribir uno.<br> Al terminar de escribir la contraseña pulsaremos <strong>intro</strong>, y nos pide que repitamos la contraseña, una vez terminemos el <strong>clear</strong> se habrá puesto como <strong>set</strong>.<br><br> Para la contraseña Power On seguiremos el mismo procedimiento que con la contraseña de administrador, pero esta vez  en la opción de Power On Password, al final del proceso las dos opciones deberán de estar en <strong>Set</strong> como la imagen de abajo.  <img alt="imagen menu Security" src="./img/43451764113da9ef.jpg">  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Opciones de Arranque" duration="10">
+        <p>Primero nos moveremos al apartado de <strong>Boot Options</strong>, en este menú configuraremos los arranques externos<br>  </p>
+<h2 is-upgraded><strong>Arranque por USB</strong></h2>
+<p> Nos moveremos a la opción de <strong><em>USB Boot</em></strong>, que es el que permite arrancar otro sistema operativo desde el puerto usb, si está en <strong>Disabled</strong>, significa que está desactivado y no hay que tocarlo. Si está en <strong>Enable</strong> pulsaremos la tecla <strong>intro</strong> y cambiaremos el modo a <strong>Disabled  </strong><img alt="imagen USB Boot" src="./img/df617ab1689ecffc.jpg">  </p>
+<h2 is-upgraded><strong>Secure Boot</strong></h2>
+<p> Después nos iremos a la opción de <strong><em>Secure Boot</em></strong>, es un opción introducida por Microsoft a partir de Windows 8 que deniega la ejecución en el arranque de software no firmado y, en principio, prohíbe la ejecución de cualquier cosa que no sea Windows.<br> Pero, algunas distribuciones Linux se han ido adaptando para que también se permita su ejecución. <br><br>  Si tu sistema operativo es <strong><em>Linux</em></strong>, es aconsejable que esta opción este en modo <strong>Disabled</strong>, y si es <strong><em>Windows</em></strong>, se aconseja en modo <strong>Enable</strong>, ya que impide que software no reconocidos se ejecuten.<br>  En la realidad, si tu sistema operativo es <strong>Ubuntu</strong> o <strong>Debian</strong> lo más seguro es que esta opción permite la ejecución del software.  <img alt="imagen Secure Boot" src="./img/632fe7bf4c0f3eea.jpg">  </p>
+<h2 is-upgraded><strong>Arranque por Red</strong></h2>
+<p> Nos moveremos a la opción de <strong><em>Network Boot</em></strong>, que es el que permite arrancar el sistema operativo desde la red, si el uso del ordenador es como servidor se aconseja que se deje en modo <strong>Enable</strong>. <br> Pero para uso doméstico o personal se aconseja dejarlo en modo <strong>Disabled</strong>, ya que con esta opción no permitiremos que alguien encienda el ordenador desde la red.  </p>
+<h2 is-upgraded><strong>Orden de Arranque</strong></h2>
+<p> El orden de arranque es el orden por el que el ordenador intenta arrancar primero.  <img alt="imagen Boot Order" src="./img/27b8796b2553055.jpg">  El modo para cambiarlo es seleccionarlo con las flechas y utilizar <strong>F5</strong> y <strong>F6</strong> para cambiar el orden, las opciones con un signo de interrogación, significa que esa opción de arranque está deshabilitada.<br> Ahora te explicaremos el significado de cada opción:  <br> <strong>USB Flash Drive/USB Hard Disk</strong>: Esta opción significa que intentará arrancar desde un pendrive o un disco duro. <br> <strong>USB CD/DVD Rom Drive</strong>: Esta opción significa que intentará arrancar desde un DVD, CD o un disco óptico.<br>    <em>En los ordenadores actuales sin lector de cd esta opción siempre estará desactivada<br> </em><strong>OS Boot Manager</strong>: Esta opción significa que intentará arrancar desde el volumen de arranque del sistema operativo instalado. <br> <strong>Network Adapter</strong>: Esta opción significa que intentará arrancar desde la tarjeta red de nuestro ordenador. <br> La recomendación es poner la opción de <strong>OS Boot Manager</strong> como la primera, y tener el resto de las opciones deshabilitadas, y solo cambiar el orden o activar algunas de las otras opciones solamente cuando sea necesario  <img alt="imagen Boot Order" src="./img/32a63343bf67aea5.jpg">  <em>Este orden es solo un ejemplo de ello  </em></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Para Terminar" duration="1">
+<p> Para terminar nos moveremos al apartado de <strong>Exit</strong>, a la opción de <strong>Save Changes and Exit</strong> para guardar los cambios realizados y salir de la BIOS, si este paso no se realiza, los cambios en la configuración de la BIOS no se guardarán.  <img alt="imagen Save Changes and Exit" src="./img/4bfa36e8d8e86cc8.jpg"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
