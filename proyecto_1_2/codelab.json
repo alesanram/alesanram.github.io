@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-24T18:21:14+02:00",
+  "id": "arranque_linux_01",
+  "duration": 17,
+  "title": "Arranque Seguro Linux",
+  "summary": "Arranque Seguro Linux",
+  "source": "codelab.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "grub2",
+    "linux"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "arranque_linux_01"
+}

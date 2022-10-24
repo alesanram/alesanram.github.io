@@ -1,0 +1,128 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Arranque Seguro Linux</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="arranque_linux_01"
+                  title="Arranque Seguro Linux"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        <h2 is-upgraded><strong>¿Qué es GRUB?</strong></h2>
+<aside class="warning"><p> GNU GRUB (GRand Unified Bootloader) es un programa que instala un gestor de arranque en el registro MBR, que existe al principio de los sectores de un disco. Le permite insertar instrucciones específicas en el MBR que carga un entorno de comandos o menú de GRUB para así poder iniciar el sistema operativo que elija, transferir instrucciones especiales a los kernels durante el arranque o conocer parámetros del sistema (como la memoria RAM disponible) antes de arrancar. <br><strong>Bibliografía </strong><a href="https://www.cambiadeso.es/entradas/todo-sobre-el-grub/" target="_blank"><em>https://www.cambiadeso.es/entradas/todo-sobre-el-grub/</em></a></p>
+</aside>
+<h2 is-upgraded><strong>¿Qué contiene GRUB?</strong></h2>
+<p> GRUB está formado por un conjunto de scripts y ficheros: </p>
+<ul>
+<li> <strong>/boot/grub/grub.cfg</strong>: Contiene la configuración de opciones de menú de GRUB. </li>
+<li> <strong>/etc/default/grub</strong>: Controla la configuración de usuario y entorno de GRUB.</li>
+<li> <strong>Scripts en /etc/grub.d/</strong>: Estos scripts se leen al ejecutar grub-mkconfig o update-grub y sus instrucciones sirven para modificar el /etc/default/grub.cfg.</li>
+<li> <strong>/boot/grub/custom.cfg</strong>: Elemento opcional para añadir elementos personalizados al menú de arranque. Es una alternativa a la modificación del script 40_custom</li>
+</ul>
+<p class="image-container"><img alt="imagen grub example" src="img\\ef4b41df6726f027.png">    </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ocultación del arranque" duration="5">
+        <p><br> Primero nos iremos al directorio raíz, utilizando el siguiente comando: </p>
+<pre><code>cd ..
+</code></pre>
+<p><em>Como se muestra en la siguiente imagen:<br>  </em><img alt="imagen cd comand" src="img\\3d0da4479c95aae7.png">  <br><br> Después abrimos el archivo de configuración del grub con el comando </p>
+<pre><code>sudo nano /etc/default/grub
+</code></pre>
+<p>   En el archivos editamos el <strong>GRUB_TIMEOUT</strong> a 0, con esta configuración conseguimos que el <strong>GRUP</strong>(gestor de arranque) se muestre durante 0 segundos.Evitando que se puede elegir el sistema operativo.<br>   Con esta configuración, es aconsejable configurar también el <strong>GRUP_DEFAULT</strong> que es el que indica la opción por defecto del grup, el número al poner es la posición en la lista en el menú de arranque de grub de esa opción, empezando esta lista en 0 <br><br>   <img alt="imagen grub configuration file" src="img\\b3d037a7bc6cbdc8.png">   </p>
+<aside class="special"><p> No te olvides de ejecutar <strong>update-grub2</strong> o <strong>update-grub</strong> para guardar la configuración de grub </p>
+</aside>
+<p class="image-container"><img alt="imagen update grub" src="img\\75662e46c1ee1d47.png">     </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copia de Seguridad" duration="5">
+        <aside class="warning"><p><strong><em>¿Que es? <br></em></strong> La  copia de seguridad de la configuración del grub es básicamente una copia del directorio <strong>/etc/grub.d/</strong>, preferentemente en una unidad de almacenamiento externo. </p>
+</aside>
+<p>   Desde el directorio raíz, ejecutamos el siguiente comando: </p>
+<pre><code>sudo mkdir /etc/grup.d/ 
+</code></pre>
+<p> El comando creara una carpeta que nos servira para realizar la copia de segurida, después ejecutamos este comando: </p>
+<pre><code>sudo cp -R /etc/grup.d/ /grub-backup
+</code></pre>
+<p>   Esto copiará todos los archivos a la carpeta creada anteriormente, ahora comprobamos los archivos copiados en la carpeta <strong>grup-backup<br></strong><em>Los archivos necesarios para la copia de seguridad son:   </em><img alt="imagen ls copy" src="img\\ecd1793da822dfc4.png"><br><br> Si confirmamos que se copiaron correctamente los archivos copiaremos o moveremos estos a una unidad externa<br><br>   <img alt="imagen move copy" src="img\\a314a6bf5555456a.png">   </p>
+<aside class="warning"><p> Para restaurar las configuraciones y entradas de GRUB, copia la copia de seguridad en el directorio después ejecuta los siguientes comandos para restaurar los archivos </p>
+</aside>
+<pre><code>cd grub-backup
+//Restaurar el el archivo «grub»
+sudo mv grub /etc/default/
+cd /grub-backup/grub.d/
+//Restaura las entradas del cargador de arranque Grub
+sudo mv * /etc/grub.d/
+</code></pre>
+<aside class="special"><p> No te olvides de ejecutar <strong>update-grub2</strong> o <strong>update-grub</strong> para guardar la configuración de grub y restaurarlo </p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de arranque" duration="5">
+        <h2 is-upgraded>Contraseña de Texto Plano </h2>
+<p>Desde el directorio raíz ejecutamos el siguiente comando para abrir el archivo de configuración.   </p>
+<pre><code>sudo nano /etc/grub.d/40_custom
+</code></pre>
+<p>   Para añadir una contraseña de arranque escribimos al final del archivo <strong>set superusers=&#34;root&#34;</strong> y <strong>password root CONTRASEÑA<br><br>   </strong><img alt="imagen password configuration" src="img\\a6bc8c62a6742f6c.png">   </p>
+<aside class="warning"><p> No te olvides de establecer contraseñas seguras utilizando más de 8 caracteres, añadiendo números y mayúsculas y caracteres especiales. </p>
+</aside>
+<h2 is-upgraded>Contraseña Cifrada </h2>
+<p> Para una capa más de seguridad, es aconsejable cifrar la contraseña de arranque, utilizando el siguiente comando   </p>
+<pre><code>sudo grub-mkpasswd-pbkdf2
+</code></pre>
+<p><img alt="imagen password comand" src="img\\4a46fc096120f967.png">   <br><br>Ahora añadiremos al final del archivo <strong>40_custom</strong>, las variables de *set superusers=&#34;root&#34;** y <strong>password_pbkdf2 e root CONTRASEÑA CIFRADA<br><br>   </strong><img alt="imagen password cifrad" src="img\\811f310d7f071fbc.png">   </p>
+<aside class="special"><p> Recuerda ejecutar <strong>update-grub2</strong> o <strong>update-grub</strong> para guardar la configuración de grub, cada vez que realices un cambio en la configuración </p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Otras opciones" duration="1">
+        <h3 is-upgraded><strong>Cambio de permisos</strong></h3>
+<p>Otra medida de seguridad es el cambio de permiso del GRUB para que solo pueda ser editado por el root, con el comando chmod.   </p>
+<pre><code>sudo chmod -R 700 /etc/grub.d/
+sudo chmod -R 700 /etc/default/grub
+sudo chmod 700 /boot/grub/grub.cfg
+sudo chmod 700 /boot/grub/custom.cfg
+</code></pre>
+<p>   Al utilizar sudo y el tipo de permisos a 700 obligamos que solo el propietario de los ficheros(root) pueda  leer, escribir y ejecutar el archivo   </p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="../js/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
