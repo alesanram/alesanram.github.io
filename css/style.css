@@ -77,7 +77,7 @@ html {
       color: rgba(255, 255, 255, 0.5);
     }
     #mainNav .nav-link:hover {
-      color: rgba(255, 255, 255, 0.75);
+      color: #86895d;
     }
     #mainNav .nav-link:active {
       color: #fff;
